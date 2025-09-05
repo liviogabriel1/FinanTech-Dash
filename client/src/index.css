@@ -1,0 +1,16 @@
+/* src/index.css (conteúdo final) */
+
+/*
+  Sobrescreve o estilo de autofill do navegador para manter o design consistente.
+*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    /* Usa um box-shadow interno gigante para "pintar" por cima do fundo do navegador. */
+    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+    box-shadow: 0 0 0 30px #ffffff inset !important;
+
+    /* Força a cor do texto para ser a cor primária do nosso tema */
+    -webkit-text-fill-color: #1A2027 !important;
+}

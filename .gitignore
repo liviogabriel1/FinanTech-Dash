@@ -1,0 +1,115 @@
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Node / Monorepo ---
+**/node_modules/
+**/.pnp.*
+.pnp.*
+
+# --- Builds / Out dirs ---
+**/dist/
+**/build/
+**/lib/
+**/out/
+**/.cache/
+**/.turbo/
+.vercel/
+.railway/
+.vite/
+**/.vite/
+.storybook-out/
+storybook-static/
+
+# --- TypeScript ---
+*.tsbuildinfo
+
+# --- Logs / PIDs ---
+logs/
+**/*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+pids/
+*.pid
+*.pid.lock
+
+# --- Env (mantenha apenas exemplos) ---
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.local.example
+
+# --- Testing ---
+coverage/
+.nyc_output/
+junit.xml
+test-results/
+playwright-report/
+cypress/videos/
+cypress/screenshots/
+
+# --- Lint/Tools caches ---
+.eslintcache
+.stylelintcache
+.parcel-cache/
+
+# --- Package managers (Yarn Berry) ---
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# --- IDEs/Editors ---
+.vscode/
+.idea/
+.history/
+
+# --- Databases / Prisma ---
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+prisma/*.db
+prisma/*.db-journal
+
+# --- React / Next / Vite ---
+.next/
+.svelte-kit/
+web-build/
+**/*.cache
+
+# --- Expo / React Native ---
+.expo/
+.expo-shared/
+*.iml
+android/.gradle/
+android/.idea/
+android/app/build/
+android/build/
+ios/Pods/
+ios/build/
+# Keystores & credentials
+*.keystore
+*.jks
+*.p8
+*.p12
+*.key
+*.pem
+*.mobileprovision
+
+# --- Images/Artifacts temporários ---
+*.tgz
+*.zip
+*.tar
+*.gz
+
+# --- Misc ---
+.tmp/
+temp/
+tmp/

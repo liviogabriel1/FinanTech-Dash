@@ -1,0 +1,99 @@
+// server/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  emailVerified         DateTime?
+  emailVerificationToken String?   @unique
+
+  // NOVOS CAMPOS PARA RECUPERAÇÃO DE SENHA
+  passwordResetToken  String?   @unique // Guarda o token único para redefinir a senha
+  passwordResetExpires DateTime? // Guarda a data e hora em que o token expira
+
+  wallets                Wallet[]
+  transactions           Transaction[] @relation("UserTransactions")
+  scheduledTransactions ScheduledTransaction[]
+}
+
+model Wallet {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  transactions           Transaction[]
+  scheduledTransactions ScheduledTransaction[] // Adiciona a relação
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+// NOVO ENUM: Para definir a frequência da recorrência
+enum Recurrence {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+// NOVO MODELO: Para armazenar as regras de agendamento
+model ScheduledTransaction {
+  id        String   @id @default(uuid())
+  title     String
+  amount    Float
+  category  String
+  type      TransactionType
+  
+  frequency Recurrence // Diário, Semanal ou Mensal
+  startDate DateTime   // Quando o agendamento começa a valer
+  
+  // Para agendamentos mensais (ex: todo dia 15)
+  dayOfMonth Int?     
+  
+  // Para agendamentos semanais (0=Domingo, 1=Segunda, ..., 6=Sábado)
+  dayOfWeek  Int?     
+  
+  // Campo crucial: armazena a data da próxima vez que o robô deve executar esta regra
+  nextRunDate DateTime 
+
+  wallet   Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  walletId String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
+
+model Transaction {
+  id          String          @id @default(uuid())
+  title       String
+  amount      Float
+  type        TransactionType
+  category    String
+  date        DateTime
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  wallet   Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  walletId String
+
+  user   User   @relation("UserTransactions", fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
