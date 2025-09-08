@@ -15,14 +15,14 @@
   "description": "",
   "dependencies": {
     "@prisma/client": "^6.15.0",
+    "@sendinblue/client": "^3.3.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "node-cron": "^4.2.1",
-    "resend": "^6.0.3"
+    "node-cron": "^4.2.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
