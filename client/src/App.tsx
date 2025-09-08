@@ -6,8 +6,10 @@ import { Dashboard } from './pages/Dashboard';
 import { Schedules } from './pages/Schedules';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { MainLayout } from './layouts/MainLayout';
-import { PendingVerification } from './pages/PendingVerification'; // 1. Importe
-import { EmailVerified } from './pages/EmailVerified';       // 2. Importe
+import { PendingVerification } from './pages/PendingVerification';
+import { EmailVerified } from './pages/EmailVerified';
+import { ForgotPassword } from './pages/ForgotPassword';
+import { ResetPassword } from './pages/ResetPassword'; 
 
 function App() {
   return (
@@ -16,8 +18,10 @@ function App() {
         {/* Rotas públicas */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/pending-verification" element={<PendingVerification />} /> {/* 3. Adicione */}
-        <Route path="/email-verified" element={<EmailVerified />} />             {/* 4. Adicione */}
+        <Route path="/pending-verification" element={<PendingVerification />} />
+        <Route path="/email-verified" element={<EmailVerified />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* Rotas protegidas que usam o MainLayout */}
         <Route element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>

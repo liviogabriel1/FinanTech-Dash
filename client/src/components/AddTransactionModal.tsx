@@ -75,7 +75,7 @@ export const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ open, 
             category,
             date,
             type,
-            walletId: selectedWallet.id // 3. Inclua o ID da carteira nos dados
+            walletId: selectedWallet.id
         };
 
         try {

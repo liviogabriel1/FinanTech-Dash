@@ -9,7 +9,7 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-    const { isAuthenticated, loading } = useAuth(); // Puxe o estado de loading
+    const { isAuthenticated, loading } = useAuth(); // Puxa o estado de loading
 
     if (loading) {
         // Enquanto estiver carregando, mostre um spinner

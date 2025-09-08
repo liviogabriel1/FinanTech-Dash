@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-// ... (interfaces User e AuthContextType)
 interface User {
     id: string;
     name: string;
@@ -9,7 +8,7 @@ interface User {
 interface AuthContextType {
     isAuthenticated: boolean;
     user: User | null;
-    loading: boolean; // Adicione o estado de loading
+    loading: boolean;
     login: (token: string, userData: User) => void;
     logout: () => void;
 }
@@ -42,7 +41,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const login = (token: string, userData: User) => {
         localStorage.setItem('authToken', token);
         localStorage.setItem('authUser', JSON.stringify(userData));
-        localStorage.setItem('hasVisited', 'true'); // <-- Adicionaremos isso para o segundo problema
+        localStorage.setItem('hasVisited', 'true');
         setUser(userData);
     };
 

@@ -1,8 +1,8 @@
-// src/pages/Register.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { TextField, Button, Typography, Box, Paper, Link } from '@mui/material';
 import api from '../services/api';
+import { PasswordStrengthMeter } from '../components/PasswordStrengthMeter';
 
 export function Register() {
     const [name, setName] = useState('');
@@ -15,12 +15,8 @@ export function Register() {
         event.preventDefault();
         setError('');
         try {
-            // A API agora retorna apenas uma mensagem de sucesso, não faz login
             await api.post('/auth/register', { name, email, password });
-
-            // MUDANÇA CRUCIAL: Redireciona para a página de verificação pendente
             navigate('/pending-verification');
-
         } catch (err: any) {
             const message = err.response?.data?.message || 'Erro ao registar. Tente novamente.';
             setError(message);
@@ -53,10 +49,10 @@ export function Register() {
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: 4 }}>
                 <Paper elevation={0} sx={{ p: 4, width: '100%', maxWidth: 400, borderRadius: 3 }}>
                     <Typography component="h1" variant="h4" fontWeight={700} gutterBottom>
-                        Crie sua conta
+                        Crie a sua conta
                     </Typography>
                     <Typography color="text.secondary" sx={{ mb: 3 }}>
-                        Comece a organizar suas finanças hoje mesmo.
+                        Comece a organizar as suas finanças hoje mesmo.
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit}>
                         <TextField
@@ -72,11 +68,14 @@ export function Register() {
                             type="password" id="password" autoComplete="new-password"
                             value={password} onChange={(e) => setPassword(e.target.value)}
                         />
+
+                        <PasswordStrengthMeter password={password} />
+
                         {error && (
                             <Typography color="error" variant="body2" sx={{ mt: 2 }}>{error}</Typography>
                         )}
                         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, py: 1.5 }}>
-                            Cadastrar
+                            Registar
                         </Button>
                         <Typography align="center" color="text.secondary">
                             Já tem uma conta?{' '}

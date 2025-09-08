@@ -1,6 +1,6 @@
 // src/components/WalletSelector.tsx
 import React from 'react';
-import { Box, Typography, Select, MenuItem, IconButton, Tooltip } from '@mui/material'; // Adicione Tooltip
+import { Box, Typography, Select, MenuItem, IconButton, Tooltip } from '@mui/material'; // Adiciona Tooltip
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import SettingsIcon from '@mui/icons-material/Settings'; // Ícone de configurações
 import { useWallets } from '../context/WalletContext';

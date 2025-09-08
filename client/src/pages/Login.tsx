@@ -9,17 +9,16 @@ export function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [welcomeMessage, setWelcomeMessage] = useState('Bem-vindo!'); // Estado para a mensagem
+    const [welcomeMessage, setWelcomeMessage] = useState('Bem-vindo!');
     const navigate = useNavigate();
     const { login } = useAuth();
 
     useEffect(() => {
-        // Verifica a "bandeira" no localStorage quando o componente carrega
         const hasVisited = localStorage.getItem('hasVisited');
         if (hasVisited) {
             setWelcomeMessage('Bem-vindo de volta!');
         }
-    }, []); // O array vazio [] garante que isso rode apenas uma vez
+    }, []);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -30,7 +29,7 @@ export function Login() {
             login(token, user);
             navigate('/dashboard');
         } catch (err: any) {
-            const message = err.response?.data?.message || 'Erro ao fazer login. Verifique suas credenciais.';
+            const message = err.response?.data?.message || 'Erro ao fazer login. Verifique as suas credenciais.';
             setError(message);
         }
     };
@@ -61,10 +60,10 @@ export function Login() {
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: 4 }}>
                 <Paper elevation={0} sx={{ p: 4, width: '100%', maxWidth: 400, borderRadius: 3 }}>
                     <Typography component="h1" variant="h4" fontWeight={700} gutterBottom>
-                        {welcomeMessage} {/* Mensagem dinâmica usada aqui */}
+                        {welcomeMessage}
                     </Typography>
                     <Typography color="text.secondary" sx={{ mb: 3 }}>
-                        Faça login para acessar seu dashboard.
+                        Faça login para aceder ao seu dashboard.
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit}>
                         <TextField
@@ -85,12 +84,19 @@ export function Login() {
                         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, py: 1.5 }}>
                             Entrar
                         </Button>
-                        <Typography align="center" color="text.secondary">
-                            Não tem uma conta?{' '}
-                            <Link component={RouterLink} to="/register" fontWeight={600}>
-                                Cadastre-se
+
+                        {/* Links de rodapé com novo layout */}
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 1 }}>
+                            <Typography color="text.secondary">
+                                Não tem uma conta?{' '}
+                                <Link component={RouterLink} to="/register" fontWeight={600}>
+                                    Registre-se
+                                </Link>
+                            </Typography>
+                            <Link component={RouterLink} to="/forgot-password" variant="body2">
+                                Esqueceu a senha?
                             </Link>
-                        </Typography>
+                        </Box>
                     </Box>
                 </Paper>
             </Box>

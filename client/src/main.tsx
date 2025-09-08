@@ -7,7 +7,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { getTheme } from './theme.ts';
 import { ThemeToggleProvider, useThemeToggle } from './context/ThemeContext.tsx';
-import { WalletProvider } from './context/WalletContext.tsx'; // 1. Importe o WalletProvider
+import { WalletProvider } from './context/WalletContext.tsx';
 import { SnackbarProvider } from './context/SnackbarContext.tsx';
 
 import './index.css';
@@ -21,7 +21,6 @@ const AppWithProviders = () => {
       <CssBaseline />
       <AuthProvider>
         <WalletProvider>
-          {/* 2. Adicione o SnackbarProvider aqui */}
           <SnackbarProvider>
             <App />
           </SnackbarProvider>

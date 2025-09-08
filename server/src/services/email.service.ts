@@ -41,3 +41,34 @@ export const sendVerificationEmail = async (to: string, token: string) => {
         throw new Error('Falha ao enviar e-mail de verificação.');
     }
 };
+
+const frontendUrl = 'http://localhost:5173';
+
+/**
+ * Envia um e-mail de redefinição de senha para o utilizador.
+ * @param to O e-mail do destinatário.
+ * @param token O token de redefinição único.
+ */
+export const sendPasswordResetEmail = async (to: string, token: string) => {
+    const resetLink = `${frontendUrl}/reset-password?token=${token}`;
+
+    const mailOptions = {
+        from: `"FinanTech Dash" <${process.env.EMAIL_USER}>`,
+        to: to,
+        subject: 'Redefinição de Senha - FinanTech Dash',
+        html: `
+      <h1>Redefinição de Senha</h1>
+      <p>Recebemos um pedido para redefinir a sua senha. Se não foi você, por favor ignore este e-mail.</p>
+      <p>Clique no link abaixo para criar uma nova senha. Este link é válido por 1 hora:</p>
+      <a href="${resetLink}" target="_blank">Redefinir Minha Senha</a>
+    `,
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log(`✉️ E-mail de redefinição de senha enviado para ${to}`);
+    } catch (error) {
+        console.error("❌ Erro ao enviar e-mail de redefinição:", error);
+        throw new Error('Falha ao enviar e-mail de redefinição.');
+    }
+};
