@@ -36,3 +36,5 @@ function App() {
 }
 
 export default App;
+
+// Comentário para forçar um novo build na Vercel - 08/09/2025
