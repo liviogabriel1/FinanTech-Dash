@@ -1,8 +1,9 @@
-// src/services/api.ts
 import axios from 'axios';
 
+// Esta linha agora é inteligente. Ela tenta ler a variável de ambiente primeiro.
+// Se não a encontrar (como no seu ambiente local), ela usa o localhost.
 const api = axios.create({
-  baseURL: 'http://localhost:3333/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3333/api',
 });
 
 // Interceptor para adicionar o token a cada requisição
