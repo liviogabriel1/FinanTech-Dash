@@ -7,7 +7,7 @@ import { sendVerificationEmail, sendPasswordResetEmail } from '../services/email
 
 const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET || 'seu-segredo-super-secreto-para-desenvolvimento';
-const frontendUrl = 'http://localhost:5173';
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
 
 // Função para validar a força da senha
 const isPasswordStrong = (password: string) => {
